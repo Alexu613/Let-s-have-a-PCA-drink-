@@ -1,0 +1,41 @@
+# Our dataset : drinks
+head(drinks)
+
+# Declare original index as country
+df_new = drinks[,-1]
+rownames(df_new) <- drinks$country
+
+# Run the Principal Component Analysis (PCA)
+PCA_model <- prcomp(df_new, center = TRUE, scale = TRUE)
+
+# Check model object
+names(pca_out)
+
+# We can display the loadings of the principal components (PCs) as follows.
+PCA_model$rotation
+
+
+OUTPUT[15]
+                           PC1         PC2         PC3        PC4
+beer_servings           0.5334049 -0.06215686  0.73092436 -0.4211476
+spirit_servings         0.4171967  0.74719858 -0.41718921 -0.3059319
+wine_servings           0.4401529 -0.66134710 -0.53887889 -0.2801695
+total_litres_of pure... 0.5896537  0.02123254  0.03622546  0.8065639
+
+
+
+# We can get the scores of the principal components (PCs) as well
+head(PCA_model$x)
+
+
+OUTPUT[28]
+                      PC1        PC2          PC3         PC4
+Afghanistan       -1.9528632 -0.2364539 -0.095364325 -0.11175538
+Albania            0.2042357  0.4055096 -0.394043358 -0.08218980
+Algeria           -1.6343110 -0.3640534 -0.002639725 -0.11543908
+Andorra            3.6522017 -1.7383122 -0.967516284 -0.05635414
+Angola             0.6314222 -0.2276072  0.955834341 -0.10987422
+Antigua & Barbuda  0.2041871  0.4383502 -0.220341112 -0.09082035
+
+# Build the biplot
+biplot(PCA_model ,scale = 0, cex = 0.8)
